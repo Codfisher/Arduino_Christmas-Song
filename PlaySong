@@ -1,19 +1,30 @@
 #include <SimpleSDAudio.h>
-int PlayButton = 2;
+int PlayButton1 = 5;
+int PlayButton2 = 2;
 int StopButton = 3;
+/*
+音樂1為聖誕鈴聲
+音樂2為聖誕祝詞
+*/
 
 void setup()
 { 
   Serial.begin(9600);
-  pinMode(PlayButton, INPUT); //播放音樂輸入
+  pinMode(PlayButton1, INPUT); //播放音樂1輸入
+  pinMode(PlayButton2, INPUT); //播放音樂2輸入
   pinMode(StopButton, INPUT); //停止音樂輸入
   SdPlay.init(SSDA_MODE_FULLRATE | SSDA_MODE_MONO | SSDA_MODE_AUTOWORKER);
 }
 
 void loop(void) {
-  if((digitalRead(PlayButton) == HIGH))
+  if((digitalRead(PlayButton1) == HIGH))
   {
     SdPlay.setFile("A.AFM");  //設定歌曲
+    SdPlay.play();  //播放
+  }
+  if((digitalRead(PlayButton2) == HIGH))
+  {
+    SdPlay.setFile("B.AFM");  //設定歌曲
     SdPlay.play();  //播放
   }
   if((digitalRead(StopButton) == HIGH))
