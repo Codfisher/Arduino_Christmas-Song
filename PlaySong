@@ -1,0 +1,24 @@
+#include <SimpleSDAudio.h>
+int PlayButton = 2;
+int StopButton = 3;
+
+void setup()
+{ 
+  Serial.begin(9600);
+  pinMode(PlayButton, INPUT); //播放音樂輸入
+  pinMode(StopButton, INPUT); //停止音樂輸入
+  SdPlay.init(SSDA_MODE_FULLRATE | SSDA_MODE_MONO | SSDA_MODE_AUTOWORKER);
+}
+
+void loop(void) {
+  if((digitalRead(PlayButton) == HIGH))
+  {
+    SdPlay.setFile("A.AFM");  //設定歌曲
+    SdPlay.play();  //播放
+  }
+  if((digitalRead(StopButton) == HIGH))
+  {
+    SdPlay.stop();  //停止
+  }
+  
+}
